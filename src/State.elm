@@ -1,17 +1,12 @@
 module State exposing (..)
 
-type Page
-    = Authors
-    | Recipies
-    | Categories
-
 type alias Model =
     {   pages: List String
-    ,   selectedPage: Page
+    ,   selectedPage: String
     }
 
 defaultModel : Model
 defaultModel =
     {   pages = ["Authors", "Recipies", "Categories"]
-    ,   selectedPage = Authors
+    ,   selectedPage = "Authors"
     }

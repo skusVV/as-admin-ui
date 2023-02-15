@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently --kill-others \"npm run watch-css\" \"elm-app start\"",
     "build-css": "node-less-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-less-chokidar src/ -o src/ --watch --recursive"
+    "watch-css": "npm run build-css && node-less-chokidar src/ -o src/ --watch"
   },
   "keywords": [],
   "author": "",
