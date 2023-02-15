@@ -6,22 +6,23 @@ import Html.Events exposing (onClick)
 
 import Messages exposing (Msg)
 import Messages exposing (Msg(..))
+import State exposing (Page, pageToString)
 -- import State exposing (Page)
 
 
-viewTabs : List String -> String -> Html Msg
+viewTabs : List Page -> Page -> Html Msg
 viewTabs tabs selectedTab =
     div [class "tab"]
         (List.map (\l -> viewTab l selectedTab) tabs)
 
-viewTab : String -> String -> Html Msg
-viewTab label selectedTab =
+viewTab : Page -> Page -> Html Msg
+viewTab page selectedTab =
     let
         className = 
-            if selectedTab == label 
+            if selectedTab == page 
                 then "tab-item tab-item-active"
             else 
                 "tab-item"
     in
-        div [class className, onClick (SelectTab label)] [ text label ]
+        div [class className, onClick (SelectTab page)] [ text (pageToString page) ]
 

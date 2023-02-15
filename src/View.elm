@@ -9,6 +9,7 @@ import Components.Tabs.View exposing (viewTabs)
 import Authors.View exposing (viewAuthors)
 import Recipies.View exposing (viewRecipies)
 import Categories.View exposing (viewCategories)
+import State exposing (Page)
 
 
 view : Model -> Html Msg
@@ -25,13 +26,19 @@ view model =
         , viewSection selectedPage
         ]
 
-viewSection : String -> Html Msg
+viewSection : Page -> Html Msg
 viewSection currentSelectedPage =
     let 
         viewCurrentSection = 
-            if currentSelectedPage == "Authors" then viewAuthors
-            else if currentSelectedPage == "Recipies" then viewRecipies
-            else viewCategories
+            case currentSelectedPage of
+                State.Authors _ ->
+                    viewAuthors
+
+                State.Recipies _ ->
+                    viewRecipies
+                
+                State.Categories _ ->
+                    viewCategories
     in
     div [] [
         viewCurrentSection

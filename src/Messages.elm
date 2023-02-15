@@ -1,5 +1,5 @@
 module Messages exposing (..)
 
-
+import State exposing (Page)
 type Msg
-    = SelectTab String
+    = SelectTab Page
