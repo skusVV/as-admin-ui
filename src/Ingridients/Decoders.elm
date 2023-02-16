@@ -10,6 +10,7 @@ ingridientsDecoder =
 ingridientDecoder : Decoder Ingridient
 ingridientDecoder =
   map3 Ingridient
-    (field "ingredient_id" string)
     (field "name" string)
     (field "img" string)
+    (field "ingredient_id" string)
+    

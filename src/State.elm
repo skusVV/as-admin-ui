@@ -21,7 +21,6 @@ defaultModel =
     ,   ingridients = { loading = False
                       , ingridientsList = []
                       , selectedingridient = Nothing
-                      , justTestString = ""
                     }
     }
 
