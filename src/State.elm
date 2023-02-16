@@ -1,9 +1,29 @@
 module State exposing (..)
 
+import Ingridients.State exposing(IngidientsModel)
+
 type Page = 
     Authors String
     | Recipies String
     | Categories String   
+    | Ingridients String  
+
+type alias Model =
+    {   pages: List Page
+    ,   selectedPage: Page
+    ,   ingridients: IngidientsModel
+    }
+
+defaultModel : Model
+defaultModel =
+    {   pages = [Ingridients "Ingridients" ,Authors "Authors", Recipies "Recipies", Categories "Categories"]
+    ,   selectedPage = Ingridients "Ingridients"
+    ,   ingridients = { loading = False
+                      , ingridientsList = []
+                      , selectedingridient = Nothing
+                      , justTestString = ""
+                    }
+    }
 
 pageToString : Page -> String
 pageToString page =
@@ -17,14 +37,5 @@ pageToString page =
     Categories label ->
       label
 
-
-type alias Model =
-    {   pages: List Page
-    ,   selectedPage: Page
-    }
-
-defaultModel : Model
-defaultModel =
-    {   pages = [Authors "Authors", Recipies "Recipies", Categories "Categories"]
-    ,   selectedPage = Authors "Authors"
-    }
+    Ingridients label ->
+      label

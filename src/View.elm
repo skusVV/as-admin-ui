@@ -9,8 +9,8 @@ import Components.Tabs.View exposing (viewTabs)
 import Authors.View exposing (viewAuthors)
 import Recipies.View exposing (viewRecipies)
 import Categories.View exposing (viewCategories)
+import Ingridients.View exposing (viewIngridients)
 import State exposing (Page)
-
 
 view : Model -> Html Msg
 view model =
@@ -23,11 +23,11 @@ view model =
     
     div [ class "container"]
         [ viewTabs pages selectedPage
-        , viewSection selectedPage
+        , viewSection model selectedPage
         ]
 
-viewSection : Page -> Html Msg
-viewSection currentSelectedPage =
+viewSection : Model -> Page -> Html Msg
+viewSection model currentSelectedPage =
     let 
         viewCurrentSection = 
             case currentSelectedPage of
@@ -39,6 +39,9 @@ viewSection currentSelectedPage =
                 
                 State.Categories _ ->
                     viewCategories
+
+                State.Ingridients _ ->
+                    viewIngridients model
     in
     div [] [
         viewCurrentSection

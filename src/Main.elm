@@ -7,10 +7,12 @@ import Messages exposing (Msg)
 import Update exposing (update)
 import View exposing (view)
 
+import Ingridients.Requests exposing(getIngridients)
+
 
 init : ( Model, Cmd Msg )
 init =
-    ( defaultModel, Cmd.none )
+    ( defaultModel, getIngridients )
 
 main : Program () Model Msg
 main =

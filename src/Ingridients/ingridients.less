@@ -1,0 +1,30 @@
+.ingredient {
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+    }
+
+    &-list {
+        width: 20%;
+        background: beige;
+
+        &-item {
+            padding: 5px;
+            width: 100%;
+            text-align: start;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(128, 128, 128, .1);
+            }
+        }
+    }
+
+    &-form {
+        width: 75%;
+        background: lavender;
+    }
+}
