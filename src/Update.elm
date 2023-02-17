@@ -26,6 +26,8 @@ update msg model =
                     (model, Cmd.none)
         SelectIngridient id ->
                  (  { model | ingridients = { ingridientsList = model.ingridients.ingridientsList, selectedingridient = findIngridientById model.ingridients.ingridientsList id, loading = False} }, Cmd.none )
+        CreateIngridient _ ->
+                (model, Cmd.none)
         
 
 findIngridientById : List Ingridient -> String -> Maybe Ingridient

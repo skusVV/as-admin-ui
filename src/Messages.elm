@@ -8,3 +8,5 @@ type Msg
     = SelectTab Page
     | GotIngridients (Result Http.Error (List Ingridient))
     | SelectIngridient String
+    | CreateIngridient Ingridient
+    
