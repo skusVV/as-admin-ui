@@ -21,18 +21,16 @@ viewIngridients model =
         , div [class "ingredient-form"] [ viewIngridientForm model.ingridients.selectedingridient ]
     ]
 
-viewIngridientForm : Maybe Ingridient -> Html Msg
+viewIngridientForm : Ingridient -> Html Msg
 viewIngridientForm i =
     let
-        safeIngridient =
-            i |> Maybe.withDefault {ingredient_id = "", name="", img= ""}
         isOldIngridient = 
-            Maybe.isJust i
+            not (String.isEmpty i.ingredient_id)
     in
     div [] [
-          viewField "Ingridient Id" "Provide an Uniq ID for this Ingridient" safeIngridient.ingredient_id isOldIngridient
-        , viewField "Name" "Provide a name" safeIngridient.name False
-        , viewField "Img" "Provide an image Url" safeIngridient.img False
+          viewField "Ingridient Id" "Provide an Uniq ID for this Ingridient" i.ingredient_id isOldIngridient
+        , viewField "Name" "Provide a name" i.name False
+        , viewField "Img" "Provide an image Url" i.img False
         , button [disabled isOldIngridient] [text "Create"]
         , button [disabled (not isOldIngridient)] [text "Update"]
     ]

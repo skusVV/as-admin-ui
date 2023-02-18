@@ -8,13 +8,17 @@ type alias Ingridient =
 
 type alias IngidientsModel =
     {   ingridientsList: List Ingridient
-    ,   selectedingridient: Maybe Ingridient
+    ,   selectedingridient: Ingridient
     ,   loading: Bool
     }
 
 defaultModel : IngidientsModel
 defaultModel =
     {   ingridientsList = []
-    ,   selectedingridient = Nothing
+    ,   selectedingridient = defaultIngridient
     ,   loading = False
     }
+
+defaultIngridient : Ingridient
+defaultIngridient = 
+    { name = "", img = "", ingredient_id = ""}

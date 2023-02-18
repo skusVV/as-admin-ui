@@ -1,6 +1,6 @@
 module State exposing (..)
 
-import Ingridients.State exposing(IngidientsModel)
+import Ingridients.State exposing(IngidientsModel, defaultIngridient)
 
 type Page = 
     Authors String
@@ -20,7 +20,7 @@ defaultModel =
     ,   selectedPage = Ingridients "Ingridients"
     ,   ingridients = { loading = False
                       , ingridientsList = []
-                      , selectedingridient = Nothing
+                      , selectedingridient = defaultIngridient
                     }
     }
 
