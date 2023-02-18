@@ -21,7 +21,7 @@ update msg model =
         GotIngridients result ->
             case result of
                 Ok resultText ->
-                    (  { model | ingridients = { ingridientsList = resultText, selectedingridient = { name = "", img = "", ingredient_id = ""}, loading = False} }, Cmd.none )
+                    (  { model | ingridients = { ingridientsList = resultText, selectedingridient = defaultIngridient, loading = False} }, Cmd.none )
 
                 Err _ ->
                     (model, Cmd.none)
@@ -29,10 +29,55 @@ update msg model =
                  (  { model | ingridients = { ingridientsList = model.ingridients.ingridientsList, selectedingridient = findIngridientById model.ingridients.ingridientsList id, loading = False} }, Cmd.none )
         CreateIngridient _ ->
             (model, Cmd.none)
-        UpdateIngridientId _ ->
+        UpdateIngridientId id ->
+            let
+    
+                oldSelectedIngridient =
+                    model.ingridients.selectedingridient
+                newSelectedIngridient =
+                    {oldSelectedIngridient | ingredient_id = id}
+                oldIngridientsModel =
+                    model.ingridients
+                updatedIngridientsModel =
+                    {oldIngridientsModel | selectedingridient = newSelectedIngridient}
+            in
         
             (
-                model
+                {model | ingridients = updatedIngridientsModel}
+                , Cmd.none
+            )
+        UpdateIngridientName name ->
+            let
+    
+                oldSelectedIngridient =
+                    model.ingridients.selectedingridient
+                newSelectedIngridient =
+                    {oldSelectedIngridient | name = name}
+                oldIngridientsModel =
+                    model.ingridients
+                updatedIngridientsModel =
+                    {oldIngridientsModel | selectedingridient = newSelectedIngridient}
+            in
+        
+            (
+                {model | ingridients = updatedIngridientsModel}
+                , Cmd.none
+            )
+        UpdateIngridientImg img ->
+            let
+    
+                oldSelectedIngridient =
+                    model.ingridients.selectedingridient
+                newSelectedIngridient =
+                    {oldSelectedIngridient | img = img}
+                oldIngridientsModel =
+                    model.ingridients
+                updatedIngridientsModel =
+                    {oldIngridientsModel | selectedingridient = newSelectedIngridient}
+            in
+        
+            (
+                {model | ingridients = updatedIngridientsModel}
                 , Cmd.none
             )
 

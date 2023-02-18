@@ -11,4 +11,6 @@ type Msg
     | SelectIngridient String
     | CreateIngridient Ingridient
     | UpdateIngridientId String
+    | UpdateIngridientName String
+    | UpdateIngridientImg String
     
