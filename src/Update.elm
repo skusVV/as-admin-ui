@@ -8,6 +8,7 @@ import Messages exposing (Msg)
 import Messages exposing (Msg(..))
 import State exposing (Page(..))
 import Ingridients.State exposing(Ingridient, defaultIngridient)
+import Ingridients.Requests exposing(createIngridient)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -27,8 +28,8 @@ update msg model =
                     (model, Cmd.none)
         SelectIngridient id ->
                  (  { model | ingridients = { ingridientsList = model.ingridients.ingridientsList, selectedingridient = findIngridientById model.ingridients.ingridientsList id, loading = False} }, Cmd.none )
-        CreateIngridient _ ->
-            (model, Cmd.none)
+        CreateIngridient b ->
+            (model, createIngridient b)
         UpdateIngridientId id ->
             let
     
@@ -80,6 +81,13 @@ update msg model =
                 {model | ingridients = updatedIngridientsModel}
                 , Cmd.none
             )
+        CreatedIngirient result ->
+            case result of
+                Ok _ ->
+                     (model, Cmd.none)
+
+                Err _ ->
+                    (model, Cmd.none)
 
 
 findIngridientById : List Ingridient -> String -> Ingridient

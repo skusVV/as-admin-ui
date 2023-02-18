@@ -30,6 +30,6 @@ viewIngridientForm i isNew =
           viewField "Ingridient Id" "Provide an Uniq ID for this Ingridient" i.ingredient_id isNew UpdateIngridientId
         , viewField "Name" "Provide a name" i.name False UpdateIngridientName
         , viewField "Img" "Provide an image Url" i.img False UpdateIngridientImg
-        , button [disabled isNew] [text "Create"]
+        , button [disabled isNew, onClick (CreateIngridient i)] [text "Create"]
         , button [disabled (not isNew)] [text "Update"]
     ]
