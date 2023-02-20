@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 
-import State exposing (Model, defaultModel)
+import State as App
 import Messages exposing (Msg)
 import Update exposing (update)
 import View exposing (view)
@@ -10,11 +10,11 @@ import View exposing (view)
 import Ingridients.Requests exposing(getIngridients)
 
 
-init : ( Model, Cmd Msg )
+init : ( App.State, Cmd Msg )
 init =
-    ( defaultModel, getIngridients )
+    ( App.defaultModel, getIngridients )
 
-main : Program () Model Msg
+main : Program () App.State Msg
 main =
     Browser.element
         { view = view

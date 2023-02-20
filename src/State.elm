@@ -8,13 +8,13 @@ type Page =
     | Categories String   
     | Ingridients String  
 
-type alias Model =
+type alias State =
     {   pages: List Page
     ,   selectedPage: Page
     ,   ingridients: IngidientsModel
     }
 
-defaultModel : Model
+defaultModel : State
 defaultModel =
     {   pages = [Ingridients "Ingridients" ,Authors "Authors", Recipies "Recipies", Categories "Categories"]
     ,   selectedPage = Ingridients "Ingridients"

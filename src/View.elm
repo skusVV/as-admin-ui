@@ -3,7 +3,7 @@ module View exposing (..)
 import Html exposing (Html, text, div)
 import Html.Attributes exposing (class)
 
-import State exposing (Model)
+import State as App
 import Messages exposing (Msg)
 import Components.Tabs.View exposing (viewTabs)
 import Authors.View exposing (viewAuthors)
@@ -12,7 +12,7 @@ import Categories.View exposing (viewCategories)
 import Ingridients.View exposing (viewIngridients)
 import State exposing (Page)
 
-view : Model -> Html Msg
+view : App.State -> Html Msg
 view model =
     let
         pages = 
@@ -26,7 +26,7 @@ view model =
         , viewSection model selectedPage
         ]
 
-viewSection : Model -> Page -> Html Msg
+viewSection : App.State -> Page -> Html Msg
 viewSection model currentSelectedPage =
     let 
         viewCurrentSection = 

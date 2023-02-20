@@ -7,11 +7,11 @@ import Messages exposing (Msg(..))
 import Html exposing (Html, text, div, button)
 import Html.Attributes exposing (class, disabled)
 import Html.Events exposing (onClick)
-import State exposing (Model)
+import State as App
 import Components.Field.Field exposing(viewField)
 import Ingridients.State exposing (Ingridient)
 
-viewIngridients : Model -> Html Msg
+viewIngridients : App.State -> Html Msg
 viewIngridients model =
     let
         isNew = 

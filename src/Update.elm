@@ -2,7 +2,7 @@ module Update exposing (..)
 
 import List.Extra as List
 
-import State exposing (Model)
+import State as App
 
 import Messages exposing (Msg)
 import Messages exposing (Msg(..))
@@ -10,7 +10,7 @@ import State exposing (Page(..))
 import Ingridients.State exposing(Ingridient, defaultIngridient)
 import Ingridients.Requests exposing(createIngridient)
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> App.State -> ( App.State , Cmd Msg )
 update msg model =
     case msg of
         SelectTab label ->
