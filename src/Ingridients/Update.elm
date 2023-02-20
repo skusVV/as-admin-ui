@@ -5,7 +5,7 @@ import List.Extra as List
 import State as AppState
 import Ingridients.Messages exposing (..)
 import Ingridients.State exposing (..)
-import Ingridients.Requests exposing(createIngridient)
+import Ingridients.Requests exposing(createIngridient, updateIngridient)
 
 update : Msg -> AppState.State -> ( AppState.State , Cmd Msg )
 update msg model =
@@ -18,9 +18,19 @@ update msg model =
                 Err _ ->
                     (model, Cmd.none)
         SelectIngridient id ->
-                 (  { model | ingridients = { ingridientsList = model.ingridients.ingridientsList, selectedingridient = findIngridientById model.ingridients.ingridientsList id, loading = False} }, Cmd.none )
-        CreateIngridient b ->
-            (model, createIngridient b)
+                 (  { model | ingridients = { ingridientsList = model.ingridients.ingridientsList, selectedingridient = findIngridientById model.ingridients.ingridientsList id, loading = False } }, Cmd.none )
+        UnselectIngridient ->
+            ( { model | ingridients = { ingridientsList = model.ingridients.ingridientsList, selectedingridient = defaultIngridient, loading = False } }, Cmd.none)
+        CreateIngridient ing ->
+            (model, createIngridient ing)
+        IngirientCreated result ->
+            case result of
+                Ok _ ->
+                  -- Model should be updated
+                     (model, Cmd.none)
+
+                Err _ ->
+                    (model, Cmd.none)
         UpdateIngridientId id ->
             let
     
@@ -72,9 +82,12 @@ update msg model =
                 {model | ingridients = updatedIngridientsModel}
                 , Cmd.none
             )
-        CreatedIngirient result ->
+        UpdateIngirient ing->
+            (model, updateIngridient ing)
+        IngirientUpdated result ->
             case result of
                 Ok _ ->
+                -- Model should be updated
                      (model, Cmd.none)
 
                 Err _ ->

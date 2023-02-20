@@ -19,8 +19,16 @@ createIngridient body =
   Http.post
     { url = "http://localhost:8000/api/ingridient"
     , body = Http.jsonBody (stringifyIngridient body)
-    , expect = Http.expectJson CreatedIngirient ingridientDecoder
+    , expect = Http.expectJson IngirientCreated ingridientDecoder
     }  
+
+updateIngridient : Ingridient -> Cmd Msg
+updateIngridient body =
+  Http.post
+    { url = "http://localhost:8000/api/ingridient/"++body.ingredient_id
+    , body = Http.jsonBody (stringifyIngridient body)
+    , expect = Http.expectJson IngirientUpdated ingridientDecoder
+    } 
 
 stringifyIngridient : Ingridient -> Encode.Value
 stringifyIngridient ing =

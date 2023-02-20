@@ -5,9 +5,12 @@ import Ingridients.State exposing (Ingridient)
 
 type Msg
     = GotIngridients (Result Http.Error (List Ingridient))
-    | CreatedIngirient (Result Http.Error Ingridient)
-    | SelectIngridient String
     | CreateIngridient Ingridient
+    | IngirientCreated (Result Http.Error Ingridient)
+    | UpdateIngirient Ingridient
+    | IngirientUpdated (Result Http.Error Ingridient)
+    | SelectIngridient String
+    | UnselectIngridient
     | UpdateIngridientId String
     | UpdateIngridientName String
     | UpdateIngridientImg String

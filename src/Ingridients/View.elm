@@ -15,7 +15,7 @@ viewIngridients model =
             List.length(List.filter (\i -> i.ingredient_id == model.ingridients.selectedingridient.ingredient_id) model.ingridients.ingridientsList) > 0 
     in
     div [class "ingredient-container"] [
-            div [class "ingredient-list"] 
+        div [class "ingredient-list"] 
             (List.map (\l -> div [ class "ingredient-list-item", onClick (SelectIngridient l.ingredient_id) ] [text l.name])
                 model.ingridients.ingridientsList)
         , div [class "ingredient-form"] [ viewIngridientForm model.ingridients.selectedingridient isNew ]
@@ -28,7 +28,8 @@ viewIngridientForm i isNew =
         , viewField "Name" "Provide an name" i.name False UpdateIngridientName
         , viewField "Img" "Provide an image Url" i.ingredient_id isNew UpdateIngridientId
         , button [disabled isNew, onClick (CreateIngridient i)] [text "Create"]
-        , button [disabled (not isNew)] [text "Update"]
+        , button [disabled (not isNew), onClick (UpdateIngirient i)] [text "Update"]
+        , button [ onClick UnselectIngridient] [text "Close"]
            
     ]
    
