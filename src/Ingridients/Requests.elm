@@ -2,10 +2,10 @@ module Ingridients.Requests exposing (..)
 
 import Json.Encode as Encode
 import Http exposing (..)
+
 import Ingridients.Messages exposing (Msg(..))
 import Ingridients.Decoders exposing (ingridientsDecoder, ingridientDecoder)
 import Ingridients.State exposing(Ingridient)
-
 
 getIngridients : Cmd Msg
 getIngridients =

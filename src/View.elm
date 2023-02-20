@@ -1,16 +1,18 @@
 module View exposing (..)
 
-import Html exposing (Html, text, div)
+import Html exposing (Html, div)
 import Html.Attributes exposing (class)
 
 import State as App
+import State exposing (Page)
 import Messages exposing (Msg)
+
 import Components.Tabs.View exposing (viewTabs)
 import Authors.View exposing (viewAuthors)
 import Recipies.View exposing (viewRecipies)
 import Categories.View exposing (viewCategories)
 import Ingridients.View exposing (viewIngridients)
-import State exposing (Page)
+
 
 view : App.State -> Html Msg
 view model =

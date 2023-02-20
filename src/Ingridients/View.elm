@@ -1,14 +1,11 @@
 module Ingridients.View exposing (..)
 
-import Maybe.Extra as Maybe
-
-import Ingridients.Messages exposing (..)
--- import Messages exposing (Msg(..))
 import Html exposing (Html, text, div, button, input)
 import Html.Attributes exposing (class, disabled, placeholder, value)
 import Html.Events exposing (onClick, onInput)
+
 import State as App
--- import Components.Field.Field exposing(viewField)
+import Ingridients.Messages exposing (..)
 import Ingridients.State exposing (Ingridient)
 
 viewIngridients : App.State -> Html Msg
@@ -27,28 +24,18 @@ viewIngridients model =
 viewIngridientForm : Ingridient -> Bool -> Html Msg
 viewIngridientForm i isNew =
     div [] [
-        div [] [
-                div [ class "field" ] [
-                div [ class "field-label"] [ text "Ingridient Id"]
-                , input [ class "field-input", placeholder "Provide an Uniq ID for this Ingridient", value i.ingredient_id, disabled isNew, onInput UpdateIngridientId] []
-            ]
-        ]
-        , div [] [
-                div [ class "field" ] [
-                div [ class "field-label"] [ text "Name"]
-                , input [ class "field-input", placeholder "Provide an image Url", value i.name, disabled False, onInput UpdateIngridientId] []
-            ]
-        ]
-        , div [] [
-                div [ class "field" ] [
-                div [ class "field-label"] [ text "Img"]
-                , input [ class "field-input", placeholder "Provide an image Url", value i.img, disabled False, onInput UpdateIngridientId] []
-            ]
-        ]
+          viewField "Ingridient Id" "Provide an Uniq ID for this Ingridient" i.ingredient_id isNew UpdateIngridientId
+        , viewField "Name" "Provide an name" i.name False UpdateIngridientName
+        , viewField "Img" "Provide an image Url" i.ingredient_id isNew UpdateIngridientId
         , button [disabled isNew, onClick (CreateIngridient i)] [text "Create"]
         , button [disabled (not isNew)] [text "Update"]
            
     ]
    
 
--- viewFieldWrapper = Html.map Messages.Ingridients (viewIngridients model)
+viewField : String -> String -> String -> Bool -> (String -> Msg) -> Html Msg
+viewField label placeholderValue v isDisabled updateMsg =
+    div [ class "field" ] [
+          div [ class "field-label"] [ text label]
+        , input [ class "field-input", placeholder placeholderValue, value v, disabled isDisabled, onInput updateMsg] []
+    ]

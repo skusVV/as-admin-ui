@@ -1,7 +1,5 @@
 module Update exposing (..)
 
-
-
 import State as App
 import Messages exposing (Msg(..))
 import Ingridients.Update as IngridientsUpd

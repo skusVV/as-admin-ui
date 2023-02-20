@@ -1,7 +1,8 @@
 module Ingridients.Decoders exposing (..)
-import Json.Decode exposing (Decoder, list, string, field, map3)
-import Ingridients.State exposing (Ingridient)
 
+import Json.Decode exposing (Decoder, list, string, field, map3)
+
+import Ingridients.State exposing (Ingridient)
 
 ingridientsDecoder : Decoder (List Ingridient)
 ingridientsDecoder =
