@@ -7,7 +7,7 @@ import State as App
 import Messages exposing (Msg)
 import Messages exposing (Msg(..))
 import State exposing (Page(..))
-import Ingridients.State exposing(Ingridient, defaultIngridient)
+import Ingridients.State as IngridientsApp
 import Ingridients.Requests exposing(createIngridient)
 
 update : Msg -> App.State -> ( App.State , Cmd Msg )
@@ -22,7 +22,7 @@ update msg model =
         GotIngridients result ->
             case result of
                 Ok resultText ->
-                    (  { model | ingridients = { ingridientsList = resultText, selectedingridient = defaultIngridient, loading = False} }, Cmd.none )
+                    (  { model | ingridients = { ingridientsList = resultText, selectedingridient = IngridientsApp.defaultIngridient, loading = False} }, Cmd.none )
 
                 Err _ ->
                     (model, Cmd.none)
@@ -90,9 +90,9 @@ update msg model =
                     (model, Cmd.none)
 
 
-findIngridientById : List Ingridient -> String -> Ingridient
+findIngridientById : List IngridientsApp.Ingridient -> String -> IngridientsApp.Ingridient
 findIngridientById ingridientList id =
     if List.length(List.filter (\i -> i.ingredient_id == id) ingridientList) > 0 then 
-        Maybe.withDefault defaultIngridient (List.find (\i -> i.ingredient_id == id) ingridientList)
-    else defaultIngridient
+        Maybe.withDefault IngridientsApp.defaultIngridient (List.find (\i -> i.ingredient_id == id) ingridientList)
+    else IngridientsApp.defaultIngridient
     

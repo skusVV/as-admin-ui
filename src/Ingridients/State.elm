@@ -6,13 +6,13 @@ type alias Ingridient =
     , ingredient_id : String
     }
 
-type alias IngidientsModel =
+type alias State =
     {   ingridientsList: List Ingridient
     ,   selectedingridient: Ingridient
     ,   loading: Bool
     }
 
-defaultModel : IngidientsModel
+defaultModel : State
 defaultModel =
     {   ingridientsList = []
     ,   selectedingridient = defaultIngridient
