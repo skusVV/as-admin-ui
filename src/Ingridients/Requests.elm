@@ -24,10 +24,14 @@ createIngridient body =
 
 updateIngridient : Ingridient -> Cmd Msg
 updateIngridient body =
-  Http.post
+  Http.request
     { url = "http://localhost:8000/api/ingridient/"++body.ingredient_id
+    , method = "PATCH"
     , body = Http.jsonBody (stringifyIngridient body)
     , expect = Http.expectJson IngirientUpdated ingridientDecoder
+    , timeout = Nothing
+    , tracker = Nothing
+    , headers = []
     } 
 
 stringifyIngridient : Ingridient -> Encode.Value
