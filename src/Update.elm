@@ -1,98 +1,24 @@
 module Update exposing (..)
 
-import List.Extra as List
+
 
 import State as App
-
-import Messages exposing (Msg)
 import Messages exposing (Msg(..))
-import State exposing (Page(..))
-import Ingridients.State as IngridientsApp
-import Ingridients.Requests exposing(createIngridient)
+import Ingridients.Update as IngridientsUpd
 
 update : Msg -> App.State -> ( App.State , Cmd Msg )
-update msg model =
-    case msg of
+update message state =
+    case message of
         SelectTab label ->
-         (  { model 
+         (  { state 
                 | selectedPage = label
             }
          , Cmd.none )
-        -- INGRIDIENTS
-        GotIngridients result ->
-            case result of
-                Ok resultText ->
-                    (  { model | ingridients = { ingridientsList = resultText, selectedingridient = IngridientsApp.defaultIngridient, loading = False} }, Cmd.none )
-
-                Err _ ->
-                    (model, Cmd.none)
-        SelectIngridient id ->
-                 (  { model | ingridients = { ingridientsList = model.ingridients.ingridientsList, selectedingridient = findIngridientById model.ingridients.ingridientsList id, loading = False} }, Cmd.none )
-        CreateIngridient b ->
-            (model, createIngridient b)
-        UpdateIngridientId id ->
+        Ingridients msg ->
             let
-    
-                oldSelectedIngridient =
-                    model.ingridients.selectedingridient
-                newSelectedIngridient =
-                    {oldSelectedIngridient | ingredient_id = id}
-                oldIngridientsModel =
-                    model.ingridients
-                updatedIngridientsModel =
-                    {oldIngridientsModel | selectedingridient = newSelectedIngridient}
+                ( newState, newCommand ) =
+                    IngridientsUpd.update msg state
             in
+            ( newState, Cmd.map Ingridients newCommand )
         
-            (
-                {model | ingridients = updatedIngridientsModel}
-                , Cmd.none
-            )
-        UpdateIngridientName name ->
-            let
-    
-                oldSelectedIngridient =
-                    model.ingridients.selectedingridient
-                newSelectedIngridient =
-                    {oldSelectedIngridient | name = name}
-                oldIngridientsModel =
-                    model.ingridients
-                updatedIngridientsModel =
-                    {oldIngridientsModel | selectedingridient = newSelectedIngridient}
-            in
-        
-            (
-                {model | ingridients = updatedIngridientsModel}
-                , Cmd.none
-            )
-        UpdateIngridientImg img ->
-            let
-    
-                oldSelectedIngridient =
-                    model.ingridients.selectedingridient
-                newSelectedIngridient =
-                    {oldSelectedIngridient | img = img}
-                oldIngridientsModel =
-                    model.ingridients
-                updatedIngridientsModel =
-                    {oldIngridientsModel | selectedingridient = newSelectedIngridient}
-            in
-        
-            (
-                {model | ingridients = updatedIngridientsModel}
-                , Cmd.none
-            )
-        CreatedIngirient result ->
-            case result of
-                Ok _ ->
-                     (model, Cmd.none)
-
-                Err _ ->
-                    (model, Cmd.none)
-
-
-findIngridientById : List IngridientsApp.Ingridient -> String -> IngridientsApp.Ingridient
-findIngridientById ingridientList id =
-    if List.length(List.filter (\i -> i.ingredient_id == id) ingridientList) > 0 then 
-        Maybe.withDefault IngridientsApp.defaultIngridient (List.find (\i -> i.ingredient_id == id) ingridientList)
-    else IngridientsApp.defaultIngridient
     

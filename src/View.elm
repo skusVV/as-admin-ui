@@ -41,7 +41,7 @@ viewSection model currentSelectedPage =
                     viewCategories
 
                 State.Ingridients _ ->
-                    viewIngridients model
+                     Html.map Messages.Ingridients (viewIngridients model)
     in
     div [] [
         viewCurrentSection

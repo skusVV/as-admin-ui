@@ -12,7 +12,13 @@ import Ingridients.Requests exposing(getIngridients)
 
 init : ( App.State, Cmd Msg )
 init =
-    ( App.defaultModel, getIngridients )
+    ( 
+        App.defaultModel, 
+        Cmd.batch [ 
+            Cmd.map Messages.Ingridients getIngridients 
+            -- Will add more init Calls
+        ]
+    )
 
 main : Program () App.State Msg
 main =
